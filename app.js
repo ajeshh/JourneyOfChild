@@ -10,11 +10,13 @@ app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
 
 
-app.get("/", function (req, res) {
+app.get("/game", function (req, res) {
   res.render("game/index");
 });
 
-
+app.get("/", function (req, res) {
+  res.render("sites/home");
+});
 
 
 app.listen(3000, function () {
