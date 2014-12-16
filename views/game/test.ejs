@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  </head>
+  <body>
+<% countryList.forEach(function(country) { %>
+<% if (country.value !== null) { %>
+<div>
+  <div>
+    <h1>
+    <%= country.date  %>
+    </h1>
+    <p>
+    <%= country.value  %>
+    </p>
+  </div>
+</div>
+<% } %>
+<% }) %>
+</body>
+</html>
+
