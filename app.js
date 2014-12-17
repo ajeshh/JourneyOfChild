@@ -102,50 +102,60 @@ app.get("/", function (req, res) {
 });
 
 app.get('/test', function (req, res) {
-
-  
-  request('http://api.worldbank.org/countries/br/indicators/SH.STA.MALN.ZS?MRV=1&format=JSON', function(err,resp,body) {
-    var data = JSON.parse(body)[1];
-    res.render('game/test', {countryList: data});
-    });
+	console.log('Got Test');
+async.parallel([
+	    function(callback){
+	    	console.log('Got 1');
+	        request('http://api.worldbank.org/countries/br/indicators/SH.STA.MALN.ZS?MRV=1&format=JSON', function(err, resp, body){
+	            callback(null, JSON.parse(body)[1]);
+	        });
+	    },
+	    function(callback){
+	    	console.log('Got 2');
+	        request('http://api.worldbank.org/countries/in/indicators/SH.STA.MALN.ZS?MRV=1&format=JSON', function(err, resp, body){
+	            callback(null, JSON.parse(body)[1]);
+	        });
+	    }
+		],
+	    function(err, results){
+	    	console.log('Got callback');
+	    //indicatorData = results;
+	    /*indicatorData.forEach(function(country){
+		    country.forEach(function(instance) {
+		        console.log(instance.date)
+		        console.log(instance.value)
+		    });
+		});*/
+console.log(results);
+	    res.render('game/test', {indicatorData: results});
+		});
 });
 
-app.get('/user/:userId', function(req, res, next) {
-    var data = {};
-    /*var countryId = req.params.countryId;*/
-    async.parallel([
-        //Load user
-        function(callback) {
-            request('http://api.worldbank.org/countries/br/indicators/SH.STA.MALN.ZS?MRV=1&format=JSON', function(err,body) {
-                if (err) return callback(err);
-                data.population = JSON.parse(body)[1];
-                console.log(data.population);
-                callback();
-            });
-        },
-        //Load posts
-        function(callback) {
-            request('http://api.worldbank.org/countries/br/indicators/SH.STA.MALN.ZS?MRV=1&format=JSON', function(err,resp,body) {
-                if (err) return callback(err);
-                data.ruralpopulation = JSON.parse(body)[1];
-                callback();
-            });
-        }
-    ], 
-    function(err, results){
-    // the results array will equal ['one','two'] even though
-    // the second function had a shorter timeout.
-    //console.log(results);
-    indicatorData = results;
-    indicatorData.forEach(function(country){
-    country.forEach(function(instance) {
-        console.log(instance.date)
-        console.log(instance.value)
-    });
-});
-    res.render('game/test', {indicatorData: results});
-});
 
+/*app.get('/user/:userId', function(req, res, next) {
+	    async.parallel([
+	    function(callback){
+	        request('http://api.worldbank.org/countries/br/indicators/SH.STA.MALN.ZS?MRV=1&format=JSON', function(err, resp, body){
+	            callback(null, JSON.parse(body)[1]);
+	        });
+	    },
+	    function(callback){
+	        request('http://api.worldbank.org/countries/in/indicators/SH.STA.MALN.ZS?MRV=1&format=JSON', function(err, resp, body){
+	            callback(null, JSON.parse(body)[1]);
+	        });
+	    }
+		]),
+	    function(err, results){
+	    indicatorData = results;
+	    /*indicatorData.forEach(function(country){
+		    country.forEach(function(instance) {
+		        console.log(instance.date)
+		        console.log(instance.value)
+		    });
+		});
+	    res.render('game/test', {indicatorData: results});
+		};
+});*/
 
 
 app.listen(3000, function () {

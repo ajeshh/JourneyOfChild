@@ -3,20 +3,14 @@
   <head>
   </head>
   <body>
-  <% indicatorData.forEach(function(country){ %>
   <div>
-<h1>BREAKING UP DATA</h1>
-  	<% country.forEach(function(instance) { %>
-  		<div>
-  		<%= instance.date %>
-  		</div>
-  		<div>
-  		<%= instance.value %>
-  		</div>
-
-  		<% }) %>
-</div>
-  	<% }) %>
+  <%= indicatorData[0][0].date %>
+  <%= indicatorData[0][0].value %>
+  </div>
+  <div>
+  If you could see this
+  <%= indicatorData[1][0].value %> how would you feel
+  </div>
 </body>
 </html>
 
