@@ -102,12 +102,49 @@ app.get("/", function (req, res) {
 });
 
 app.get('/test', function (req, res) {
+
+  
   request('http://api.worldbank.org/countries/br/indicators/SH.STA.MALN.ZS?MRV=1&format=JSON', function(err,resp,body) {
     var data = JSON.parse(body)[1];
     res.render('game/test', {countryList: data});
     });
 });
 
+app.get('/user/:userId', function(req, res, next) {
+    var data = {};
+    /*var countryId = req.params.countryId;*/
+    async.parallel([
+        //Load user
+        function(callback) {
+            request('http://api.worldbank.org/countries/br/indicators/SH.STA.MALN.ZS?MRV=1&format=JSON', function(err,body) {
+                if (err) return callback(err);
+                data.population = JSON.parse(body)[1];
+                console.log(data.population);
+                callback();
+            });
+        },
+        //Load posts
+        function(callback) {
+            request('http://api.worldbank.org/countries/br/indicators/SH.STA.MALN.ZS?MRV=1&format=JSON', function(err,resp,body) {
+                if (err) return callback(err);
+                data.ruralpopulation = JSON.parse(body)[1];
+                callback();
+            });
+        }
+    ], 
+    function(err, results){
+    // the results array will equal ['one','two'] even though
+    // the second function had a shorter timeout.
+    //console.log(results);
+    indicatorData = results;
+    indicatorData.forEach(function(country){
+    country.forEach(function(instance) {
+        console.log(instance.date)
+        console.log(instance.value)
+    });
+});
+    res.render('game/test', {indicatorData: results});
+});
 
 
 

@@ -3,20 +3,20 @@
   <head>
   </head>
   <body>
-<% countryList.forEach(function(country) { %>
-<% if (country.value !== null) { %>
-<div>
+  <% indicatorData.forEach(function(country){ %>
   <div>
-    <h1>
-    <%= country.date  %>
-    </h1>
-    <p>
-    <%= country.value  %>
-    </p>
-  </div>
+<h1>BREAKING UP DATA</h1>
+  	<% country.forEach(function(instance) { %>
+  		<div>
+  		<%= instance.date %>
+  		</div>
+  		<div>
+  		<%= instance.value %>
+  		</div>
+
+  		<% }) %>
 </div>
-<% } %>
-<% }) %>
+  	<% }) %>
 </body>
 </html>
 
