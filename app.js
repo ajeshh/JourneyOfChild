@@ -6,6 +6,7 @@ var express = require("express"),
   db = require("./models"),
   passport = require("passport"),
   session = require("cookie-session"),
+  async = require("async"),
   app = express();
 
 app.use(methodOverride("_method"));
