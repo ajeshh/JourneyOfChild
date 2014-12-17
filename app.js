@@ -3,12 +3,93 @@ var express = require("express"),
   methodOverride = require("method-override"),
   request = require("request"),
   pg = require("pg"),
+  db = require("./models"),
+  passport = require("passport"),
+  session = require("cookie-session"),
   app = express();
 
 app.use(methodOverride("_method"));
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
+
+app.use(session( {
+  secret: 'thisismysecretkey',
+  name: 'chocolate chip',
+  // this is in milliseconds
+  maxage: 3600000
+  })
+);
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+
+passport.serializeUser(function(user, done){
+  console.log("SERIALIZED JUST RAN!");
+
+  done(null, user.id);
+});
+
+passport.deserializeUser(function(id, done){
+  console.log("DESERIALIZED JUST RAN!");
+  db.user.find({
+      where: {
+        id: id
+      }
+    })
+    .then(function(user){
+      done(null, user);
+    },
+    function(err) {
+      done(err, null);
+    });
+});
+
+app.get("/login", function (req, res) {
+  if (req.user) {
+    res.redirect("/")
+  } else {
+    res.render("users/login");
+  }
+});
+
+app.post('/login', passport.authenticate('local', {
+  successRedirect: '/',
+  failureRedirect: '/login'
+}));
+
+app.get("/logout", function (req, res) {
+  // log out
+  req.logout();
+  res.redirect("/");
+});
+
+app.get("/sign_up", function (req, res) {
+  res.render("users/sign_up");
+});
+
+app.post("/users", function (req, res) {
+  console.log("POST /users");
+  var newUser = req.body.user;
+  console.log("New User:", newUser);
+  // CREATE a user and secure their password
+  db.user.createSecure(newUser.email, newUser.password, 
+    function () {
+      // if a user fails to create make them signup again
+      res.redirect("/sign_up");
+    },
+    function (err, user) {
+      // when successfully created log the user in
+      // req.login is given by the passport
+      req.login(user, function(){
+        // after login redirect to home page
+        console.log("Logged in ", req.user)
+        console.log("Id: ", user.id)
+        res.redirect('/game');
+      });
+    })
+});
 
 
 app.get("/game", function (req, res) {
