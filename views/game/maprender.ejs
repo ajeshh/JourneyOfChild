@@ -1,0 +1,59 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+      google.load("visualization", "1", {packages:["geochart"]});
+      google.setOnLoadCallback(drawRegionsMap);
+
+      function drawRegionsMap() {
+
+        var data = google.visualization.arrayToDataTable([
+          ['Country', 'Pop'],
+          ['Bangladesh', 200],
+          ['United States', 900],
+          ['Argentina', 690],
+          ['Finland', 900],
+          ['Germany', 900],
+          ['Australia', 890],
+          ['DR Congo', 100],
+            ['Algeria', 400],
+          ['Somalia', 100],
+            ['China', 870],
+            ['Bolivia', 300],
+            ['Japan', 900],
+            ['Turkey', 500]
+        ]);
+
+        var options = {
+          colorAxis: {colors: ['#F24444', '#F2BE13']},
+          backgroundColor: '#369AD9',
+          datalessRegionColor: '#F2F2F2'
+        };
+
+         var geochart = new google.visualization.GeoChart(document.getElementById('regions_div'));
+
+        google.visualization.events.addListener(
+          geochart, 'regionClick', function(eventData) {
+            var countryISO2 = eventData["region"];
+            console.log(countryISO2);
+            var countryInput = document.getElementById('search');
+            var countryForm = document.getElementById('countryForm');
+            countryInput.value = countryISO2;
+            console.log(countryInput);
+            countryForm.submit();
+          });
+
+        geochart.draw(data, options);
+      }
+    </script>
+  </head>
+  <body>
+    <div id="regions_div" style="width: 1000px; height: 500px;">
+    </div>
+     <form id="countryForm" style="display:none;"   action="/search" method="get">
+      <input id="search" type="text" name="country"/>
+        </form>
+
+  </body>
+</html>

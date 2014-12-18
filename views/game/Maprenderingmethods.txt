@@ -1,0 +1,37 @@
+Maprendering methods:
+
+//open new tab with info
+http://jsfiddle.net/dz2xS/
+
+var geochart = new google.visualization.GeoChart(document.getElementById('regions_div'));
+    google.visualization.events.addListener(geochart, 'select', function() {
+        var selectionIdx = geochart.getSelection()[0].row;
+        var countryName = data.getValue(selectionIdx, 0);
+        window.open('http://en.wikipedia.org/wiki/' + countryName);
+    });
+
+
+
+ //How to visualize tool tips for map 
+ http://jsfiddle.net/asgallant/w5DYt/3/
+
+
+ //Region click https://groups.google.com/forum/#!topic/google-visualization-api/RVLqE37JYvE
+
+ google.visualization.events.addListener(geoChart, "regionClick", function (eventData) {
+    var countryISO2 = eventData["region"];
+    inputCountryToValUpCase = "world";
+    displaySearchResults(countryISO2, inputCountryToValUpCase); 
+});
+
+
+
+//regionclick to form
+google.visualization.events.addListener(geochart, "regionClick", function (eventData) {
+        // GeoChart selections return an array of objects with a row property; no column information
+        /*var countryISO2 = eventData["region"];
+        console.log(countryISO2);
+        var countryInput = document.getElementById('search');
+        var countryForm = document.getElementById('countryForm')
+        countryForm.value = countryISO2;
+        console.log(countryForm);
