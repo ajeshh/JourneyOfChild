@@ -31,23 +31,29 @@
           datalessRegionColor: '#F2F2F2'
         };
 
-        
-        var geochart = new google.visualization.GeoChart(document.getElementById('regions_div'));
+         var geochart = new google.visualization.GeoChart(document.getElementById('regions_div'));
 
-        google.visualization.events.addListener(geochart, "regionClick", function (eventData) {
-        // GeoChart selections return an array of objects with a row property; no column information
-        var countryISO2 = eventData["region"];
-        console.log(countryISO2);
-        var selection = geochart.getSelection()[0].row;
-        var countryName = data.getValue(selection, 0);
-        window.open('http://en.wikipedia.org/wiki/' + countryName);
-    });
+        google.visualization.events.addListener(
+          geochart, 'regionClick', function(eventData) {
+            var countryISO2 = eventData["region"];
+            console.log(countryISO2);
+            var countryInput = document.getElementById('search');
+            var countryForm = document.getElementById('countryForm');
+            countryInput.value = countryISO2;
+            console.log(countryInput);
+            countryForm.submit();
+          });
 
         geochart.draw(data, options);
       }
     </script>
   </head>
   <body>
-    <div id="regions_div" style="width: 1000px; height: 500px;"></div>
+    <div id="regions_div" style="width: 1000px; height: 500px;">
+    </div>
+     <form id="countryForm" style="display:none;"   action="/search" method="get">
+      <input id="search" type="text" name="country"/>
+        </form>
+
   </body>
 </html>

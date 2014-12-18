@@ -46,7 +46,7 @@ passport.deserializeUser(function(id, done){
       done(err, null);
     });
 });
-
+// login 
 app.get("/login", function (req, res) {
   if (req.user) {
     res.redirect("/")
@@ -54,22 +54,24 @@ app.get("/login", function (req, res) {
     res.render("users/login");
   }
 });
-
+// verify user login
 app.post('/login', passport.authenticate('local', {
   successRedirect: '/',
   failureRedirect: '/login'
 }));
 
+// log out
 app.get("/logout", function (req, res) {
-  // log out
   req.logout();
   res.redirect("/");
 });
 
+//signup
 app.get("/sign_up", function (req, res) {
   res.render("users/sign_up");
 });
 
+//post new user data to DB
 app.post("/users", function (req, res) {
   console.log("POST /users");
   var newUser = req.body.user;
@@ -92,15 +94,17 @@ app.post("/users", function (req, res) {
     })
 });
 
-
+//homepage
 app.get("/game", function (req, res) {
   res.render("game/index");
 });
 
+//map element
 app.get("/map", function (req, res) {
   res.render("game/maprender");
 });
 
+//homepage API request for population info
 app.get("/", function (req, res) {
   console.log('Got Test');
   countryID = 'WLD';
@@ -108,12 +112,14 @@ app.get("/", function (req, res) {
 async.parallel([
       function(callback){
         console.log('Got 1');
+        //Total Population
           request('http://api.worldbank.org/countries/' + countryID + '/indicators/SP.POP.TOTL?MRV=1&format=JSON', function(err, resp, body){
               callback(null, JSON.parse(body)[1]);
           });
       },
       function(callback){
         console.log('Got 2');
+        //Percentage of population under 14
           request('http://api.worldbank.org/countries/' + countryID + '/indicators/SP.POP.0014.TO.ZS?MRV=1&format=JSON', function(err, resp, body){
               callback(null, JSON.parse(body)[1]);
           });
@@ -127,7 +133,7 @@ console.log(results);
 });
 
 
-
+//testing API and rendering
 app.get('/test', function (req, res) {
 	console.log('Got Test');
   countryID = 'br';
