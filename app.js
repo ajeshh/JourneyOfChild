@@ -199,9 +199,6 @@ app.get("/search", function (req, res) {
         });
 });
 
-
-app.listen(3000, function () {
-  console.log(new Array(51).join("*"));
-  console.log("\t LISTENING ON: \n\t\t localhost:3000");
-  console.log(new Array(51).join("*")); 
+app.listen(process.env.PORT || 3000, function() {
+console.log(new Array(51).join("*"));
 });
