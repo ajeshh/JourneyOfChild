@@ -103,16 +103,18 @@ app.get("/", function (req, res) {
 
 app.get('/test', function (req, res) {
 	console.log('Got Test');
+  countryID = 'br';
+
 async.parallel([
 	    function(callback){
 	    	console.log('Got 1');
-	        request('http://api.worldbank.org/countries/br/indicators/SH.STA.MALN.ZS?MRV=1&format=JSON', function(err, resp, body){
+	        request('http://api.worldbank.org/countries/' + countryID + '/indicators/SP.POP.TOTL?MRV=1&format=JSON', function(err, resp, body){
 	            callback(null, JSON.parse(body)[1]);
 	        });
 	    },
 	    function(callback){
 	    	console.log('Got 2');
-	        request('http://api.worldbank.org/countries/in/indicators/SH.STA.MALN.ZS?MRV=1&format=JSON', function(err, resp, body){
+	        request('http://api.worldbank.org/countries/in/indicators/SP.POP.TOTL?MRV=1&format=JSON', function(err, resp, body){
 	            callback(null, JSON.parse(body)[1]);
 	        });
 	    }

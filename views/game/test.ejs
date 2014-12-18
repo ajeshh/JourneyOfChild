@@ -1,16 +1,18 @@
-<!DOCTYPE html>
-<html>
-  <head>
-  </head>
-  <body>
-  <div>
-  <%= indicatorData[0][0].date %>
-  <%= indicatorData[0][0].value %>
-  </div>
-  <div>
-  If you could see this
-  <%= indicatorData[1][0].value %> how would you feel
-  </div>
-</body>
-</html>
-
+<% include ../layouts/header.ejs %>
+    <!-- Intro Section -->
+    <section id="intro" class="intro-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1>Scrolling Nav</h1>
+                     <%= indicatorData[0][0].date %>
+                      <%= indicatorData[1][0].value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") %>
+                     <div>
+                     If you could see this
+                     <%= indicatorData[1][0].value %> how would you feel
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+<% include ../layouts/footer.ejs %>
