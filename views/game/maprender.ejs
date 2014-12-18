@@ -1,3 +1,4 @@
+<!DOCTYPE HTML>
 <html>
   <head>
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
@@ -30,9 +31,19 @@
           datalessRegionColor: '#F2F2F2'
         };
 
-        var chart = new google.visualization.GeoChart(document.getElementById('regions_div'));
+        
+        var geochart = new google.visualization.GeoChart(document.getElementById('regions_div'));
 
-        chart.draw(data, options);
+        google.visualization.events.addListener(geochart, "regionClick", function (eventData) {
+        // GeoChart selections return an array of objects with a row property; no column information
+        var countryISO2 = eventData["region"];
+        console.log(countryISO2);
+        var selection = geochart.getSelection()[0].row;
+        var countryName = data.getValue(selection, 0);
+        window.open('http://en.wikipedia.org/wiki/' + countryName);
+    });
+
+        geochart.draw(data, options);
       }
     </script>
   </head>
