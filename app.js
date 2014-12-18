@@ -199,6 +199,6 @@ app.get("/search", function (req, res) {
         });
 });
 
-app.listen(process.env.PORT || 3000, function() {
-console.log(new Array(51).join("*"));
+app.listen(process.env.PORT || 3000) function() {
+console.log("Listening");
 });
