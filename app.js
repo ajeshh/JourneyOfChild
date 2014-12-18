@@ -97,9 +97,36 @@ app.get("/game", function (req, res) {
   res.render("game/index");
 });
 
-app.get("/", function (req, res) {
-  res.render("sites/home");
+app.get("/map", function (req, res) {
+  res.render("game/maprender");
 });
+
+app.get("/", function (req, res) {
+  console.log('Got Test');
+  countryID = 'WLD';
+
+async.parallel([
+      function(callback){
+        console.log('Got 1');
+          request('http://api.worldbank.org/countries/' + countryID + '/indicators/SP.POP.TOTL?MRV=1&format=JSON', function(err, resp, body){
+              callback(null, JSON.parse(body)[1]);
+          });
+      },
+      function(callback){
+        console.log('Got 2');
+          request('http://api.worldbank.org/countries/' + countryID + '/indicators/SP.POP.0014.TO.ZS?MRV=1&format=JSON', function(err, resp, body){
+              callback(null, JSON.parse(body)[1]);
+          });
+      }
+    ],
+      function(err, results){
+        console.log('Got callback');
+console.log(results);
+      res.render('sites/home', {indicatorData: results});
+    });
+});
+
+
 
 app.get('/test', function (req, res) {
 	console.log('Got Test');

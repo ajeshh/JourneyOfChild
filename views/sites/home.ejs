@@ -1,14 +1,19 @@
 <% include ../layouts/header.ejs %>
     <!-- Header -->
     <header>
+
+
         <div class="container">
             <div class="intro-text">
                 <div class="intro-lead-in">Welcome To Our Studio!</div>
-                <div class="intro-heading">It's Nice To Meet You</div>
+                <div class="intro-heading">There are 
+                <%= indicatorData[0][0].value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") %> people in this world. And <%=Math.round(indicatorData[1][0].value)%>% are under 14</div>
                 <a href="#services" class="page-scroll btn btn-xl">Tell Me More</a>
             </div>
         </div>
+       
     </header>
+    
 
     <!-- Services Section -->
     <section id="services">
