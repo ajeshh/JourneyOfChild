@@ -106,7 +106,7 @@ app.get("/map", function (req, res) {
 
 //homepage API request for population info
 app.get("/", function (req, res) {
-  console.log('Got Test');
+  console.log('Got homepage');
   countryID = 'WLD';
 
 async.parallel([
@@ -138,59 +138,66 @@ app.get('/test', function (req, res) {
 	console.log('Got Test');
   countryID = 'br';
 
-async.parallel([
-	    function(callback){
-	    	console.log('Got 1');
-	        request('http://api.worldbank.org/countries/' + countryID + '/indicators/SP.POP.TOTL?MRV=1&format=JSON', function(err, resp, body){
-	            callback(null, JSON.parse(body)[1]);
-	        });
-	    },
-	    function(callback){
-	    	console.log('Got 2');
-	        request('http://api.worldbank.org/countries/in/indicators/SP.POP.TOTL?MRV=1&format=JSON', function(err, resp, body){
-	            callback(null, JSON.parse(body)[1]);
-	        });
-	    }
-		],
-	    function(err, results){
-	    	console.log('Got callback');
-	    //indicatorData = results;
-	    /*indicatorData.forEach(function(country){
-		    country.forEach(function(instance) {
-		        console.log(instance.date)
-		        console.log(instance.value)
-		    });
-		});*/
-console.log(results);
-	    res.render('game/test', {indicatorData: results});
-		});
+  async.parallel([
+  	    function(callback){
+  	    	console.log('Got 1');
+  	        request('http://api.worldbank.org/countries/' + countryID + '/indicators/SP.POP.TOTL?MRV=1&format=JSON', function(err, resp, body){
+  	            callback(null, JSON.parse(body)[1]);
+  	        });
+  	    },
+  	    function(callback){
+  	    	console.log('Got 2');
+  	        request('http://api.worldbank.org/countries/in/indicators/SP.POP.TOTL?MRV=1&format=JSON', function(err, resp, body){
+  	            callback(null, JSON.parse(body)[1]);
+  	        });
+  	    }
+  		],
+  	    function(err, results){
+  	    	console.log('Got callback');
+  	    //indicatorData = results;
+  	    /*indicatorData.forEach(function(country){
+  		    country.forEach(function(instance) {
+  		        console.log(instance.date)
+  		        console.log(instance.value)
+  		    });
+  		});*/
+          console.log(results);
+    	    res.render('game/test', {indicatorData: results});
+  		  });
 });
 
-
-/*app.get('/user/:userId', function(req, res, next) {
-	    async.parallel([
-	    function(callback){
-	        request('http://api.worldbank.org/countries/br/indicators/SH.STA.MALN.ZS?MRV=1&format=JSON', function(err, resp, body){
-	            callback(null, JSON.parse(body)[1]);
-	        });
-	    },
-	    function(callback){
-	        request('http://api.worldbank.org/countries/in/indicators/SH.STA.MALN.ZS?MRV=1&format=JSON', function(err, resp, body){
-	            callback(null, JSON.parse(body)[1]);
-	        });
-	    }
-		]),
-	    function(err, results){
-	    indicatorData = results;
-	    /*indicatorData.forEach(function(country){
-		    country.forEach(function(instance) {
-		        console.log(instance.date)
-		        console.log(instance.value)
-		    });
-		});
-	    res.render('game/test', {indicatorData: results});
-		};
-});*/
+//show country results
+app.get("/search", function (req, res) {
+  console.log("got it");
+  var countryID = req.query.countryInput;
+  console.log("got it too");
+  async.parallel([
+        function(callback){
+          console.log('Got 1');
+            request('http://api.worldbank.org/countries/' + countryID + '/indicators/SP.POP.TOTL?MRV=1&format=JSON', function(err, resp, body){
+                callback(null, JSON.parse(body)[1]);
+            });
+        },
+        function(callback){
+          console.log('Got 2');
+            request('http://api.worldbank.org/countries/in/indicators/SP.POP.TOTL?MRV=1&format=JSON', function(err, resp, body){
+                callback(null, JSON.parse(body)[1]);
+            });
+        }
+      ],
+        function(err, results){
+          console.log('Got callback');
+        //indicatorData = results;
+        /*indicatorData.forEach(function(country){
+          country.forEach(function(instance) {
+              console.log(instance.date)
+              console.log(instance.value)
+          });
+      });*/
+          console.log(results);
+          res.render('game/search', {indicatorData: results});
+        });
+});
 
 
 app.listen(3000, function () {
