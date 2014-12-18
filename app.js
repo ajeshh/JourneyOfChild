@@ -169,7 +169,7 @@ app.get('/test', function (req, res) {
 //show country results
 app.get("/search", function (req, res) {
   console.log("got it");
-  var countryID = req.query.countryInput;
+  var countryID = br;
   console.log("got it too");
   async.parallel([
         function(callback){
@@ -199,6 +199,6 @@ app.get("/search", function (req, res) {
         });
 });
 
-app.listen(process.env.PORT || 3000) function() {
+app.listen((process.env.PORT || 3000), function() {
 console.log("Listening");
 });
