@@ -171,6 +171,21 @@ app.get("/search", function (req, res) {
         });
 });
 
+//contact form
+app.post("/", function (req, res) {
+  db.contact.create({
+      name: req.body.contact.name,
+      email: req.body.contact.email,
+      message: req.body.contact.message
+  })
+    .then(function (contact) {
+        console.log(contact);
+        res.redirect("/");
+    });
+  
+});
+
+
 
 //server
 app.listen(process.env.PORT || 3000, function() {
