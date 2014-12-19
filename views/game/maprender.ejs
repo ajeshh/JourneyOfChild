@@ -1,6 +1,20 @@
 <!DOCTYPE HTML>
 <html>
   <head>
+    <style>
+    #regions_div path:not([fill^="#f5f5f5"]):hover {
+    fill:#fec503;
+    /*stroke-width:1;  control the countries borders width */
+    stroke:#6699cc;
+    cursor:pointer;
+}
+
+#map_canvas_21 path {
+stroke-width:1; /* control the countries borders width */
+stroke:#6699cc; /* choose a color for the border */
+cursor:pointer; /* display the pointer when the map hovers the map. */
+}
+    </style>
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script type="text/javascript">
       google.load("visualization", "1", {packages:["geochart"]});
@@ -9,25 +23,26 @@
       function drawRegionsMap() {
 
         var data = google.visualization.arrayToDataTable([
-          ['Country', 'Pop'],
-          ['Bangladesh', 200],
-          ['United States', 900],
-          ['Argentina', 690],
-          ['Finland', 900],
-          ['Germany', 900],
-          ['Australia', 890],
-          ['DR Congo', 100],
-            ['Algeria', 400],
-          ['Somalia', 100],
-            ['China', 870],
-            ['Bolivia', 300],
-            ['Japan', 900],
-            ['Turkey', 500]
+          ['Country', 'ISO2'],
+          
+    [
+      
+
+
+
+
         ]);
 
         var options = {
-          colorAxis: {colors: ['#F24444', '#F2BE13']},
+          region: 'world', // World 
+          colorAxis: {colors: ['#FFF']},
           backgroundColor: '#369AD9',
+          tooltip: {
+                isHtml: true,
+                textStyle: {
+                  fontSize: 21},
+                            
+          },
           datalessRegionColor: '#F2F2F2'
         };
 
@@ -49,7 +64,7 @@
     </script>
   </head>
   <body>
-    <div id="regions_div" style="width: 1000px; height: 500px;">
+    <div id="regions_div">
     </div>
      <form id="countryForm" style="display:none;"   action="/search" method="get">
       <input id="search" type="text" name="country"/>

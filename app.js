@@ -14,6 +14,8 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
 
+
+//cookie
 app.use(session( {
   secret: 'thisismysecretkey',
   name: 'chocolate chip',
@@ -22,16 +24,18 @@ app.use(session( {
   })
 );
 
+//passport use
 app.use(passport.initialize());
 app.use(passport.session());
 
-
+//serializing user data
 passport.serializeUser(function(user, done){
   console.log("SERIALIZED JUST RAN!");
 
   done(null, user.id);
 });
 
+//deserializing user data
 passport.deserializeUser(function(id, done){
   console.log("DESERIALIZED JUST RAN!");
   db.user.find({
@@ -46,6 +50,7 @@ passport.deserializeUser(function(id, done){
       done(err, null);
     });
 });
+
 // login 
 app.get("/login", function (req, res) {
   if (req.user) {
@@ -99,7 +104,7 @@ app.get("/game", function (req, res) {
   res.render("game/index");
 });
 
-//map element
+//homepage map element
 app.get("/map", function (req, res) {
   res.render("game/maprender");
 });
@@ -133,43 +138,10 @@ console.log(results);
 });
 
 
-//testing API and rendering
-app.get('/test', function (req, res) {
-	console.log('Got Test');
-  countryID = 'br';
-
-  async.parallel([
-  	    function(callback){
-  	    	console.log('Got 1');
-  	        request('http://api.worldbank.org/countries/' + countryID + '/indicators/SP.POP.TOTL?MRV=1&format=JSON', function(err, resp, body){
-  	            callback(null, JSON.parse(body)[1]);
-  	        });
-  	    },
-  	    function(callback){
-  	    	console.log('Got 2');
-  	        request('http://api.worldbank.org/countries/in/indicators/SP.POP.TOTL?MRV=1&format=JSON', function(err, resp, body){
-  	            callback(null, JSON.parse(body)[1]);
-  	        });
-  	    }
-  		],
-  	    function(err, results){
-  	    	console.log('Got callback');
-  	    //indicatorData = results;
-  	    /*indicatorData.forEach(function(country){
-  		    country.forEach(function(instance) {
-  		        console.log(instance.date)
-  		        console.log(instance.value)
-  		    });
-  		});*/
-          console.log(results);
-    	    res.render('game/test', {indicatorData: results});
-  		  });
-});
-
 //show country results
 app.get("/search", function (req, res) {
   console.log("got it");
-  var countryID = br;
+  countryID = req.query.country;
   console.log("got it too");
   async.parallel([
         function(callback){
@@ -199,6 +171,8 @@ app.get("/search", function (req, res) {
         });
 });
 
+
+//server
 app.listen(process.env.PORT || 3000, function() {
 console.log("Listening");
 });
