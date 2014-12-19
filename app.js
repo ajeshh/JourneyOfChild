@@ -153,7 +153,7 @@ app.get("/search", function (req, res) {
         },
         function(callback){
           console.log('Got 2');
-            request('http://api.worldbank.org/countries/' + countryID + '/indicators/SP.POP.TOTL?MRV=1&format=JSON', function(err, resp, body){
+            request('http://api.worldbank.org/countries/' + countryID + '/indicators/SP.POP.0014.TO.ZS?MRV=1&format=JSON', function(err, resp, body){
                 callback(null, JSON.parse(body)[1]);
             });
         }
