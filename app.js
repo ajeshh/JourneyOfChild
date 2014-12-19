@@ -94,22 +94,19 @@ app.post("/users", function (req, res) {
         // after login redirect to home page
         console.log("Logged in ", req.user)
         console.log("Id: ", user.id)
-        res.redirect('/game');
+        res.redirect('/');
       });
     })
 });
 
-//homepage
-app.get("/game", function (req, res) {
-  res.render("game/index");
-});
+
 
 //homepage map element
 app.get("/map", function (req, res) {
   res.render("game/maprender");
 });
 
-//homepage API request for population info
+//homepage & API request for population info
 app.get("/", function (req, res) {
   console.log('Got homepage');
   countryID = 'WLD';
@@ -183,6 +180,11 @@ app.post("/", function (req, res) {
         res.redirect("/");
     });
   
+});
+
+
+app.get("/shoutouts", function (req, res) {
+  res.render("sites/shoutouts");
 });
 
 
