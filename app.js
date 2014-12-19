@@ -62,7 +62,7 @@ app.get("/login", function (req, res) {
 // verify user login
 app.post('/login', passport.authenticate('local', {
   successRedirect: '/',
-  failureRedirect: '/login'
+  failureRedirect: '/sign_up'
 }));
 
 // log out
@@ -104,6 +104,10 @@ app.post("/users", function (req, res) {
 //homepage map element
 app.get("/map", function (req, res) {
   res.render("game/maprender");
+});
+
+app.get("/map2", function (req, res) {
+  res.render("sites/maprender");
 });
 
 //homepage & API request for population info
@@ -149,7 +153,7 @@ app.get("/search", function (req, res) {
         },
         function(callback){
           console.log('Got 2');
-            request('http://api.worldbank.org/countries/in/indicators/SP.POP.TOTL?MRV=1&format=JSON', function(err, resp, body){
+            request('http://api.worldbank.org/countries/' + countryID + '/indicators/SP.POP.TOTL?MRV=1&format=JSON', function(err, resp, body){
                 callback(null, JSON.parse(body)[1]);
             });
         }

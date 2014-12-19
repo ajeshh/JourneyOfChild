@@ -6,10 +6,12 @@
 
         <div class="container">
             <div class="intro-text">
-                <div class="intro-lead-in">Learn more about children from around the world</div>
-                <div class="intro-heading">There are 
-                <%= indicatorData[0][0].value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") %> people in this world.<br>
-                 And <%=Math.round(indicatorData[1][0].value)%>% are under 14</div>
+                
+                <div class="intro-heading"><%=Math.round(indicatorData[1][0].value)%>% <br>of the   
+                <%= indicatorData[0][0].value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") %> people that live in this world <br>
+                are under 14.  
+                 </div>
+                 <div class="intro-lead-in">Learn more about theirs adversity and triumphs. </div>
                 <a href="#moreinfo" class="page-scroll btn btn-xl">Tell Me More</a>
             </div>
         </div>
@@ -17,12 +19,28 @@
     </header>
     
 
-    <!-- Services Section -->
+    <!-- Details Section -->
     <% include ../layouts/sites/details.ejs %>
     
 
     <!-- Search Section -->
-    <% include ../layouts/sites/search.ejs %>
+    <section id="search" class="bg-light-gray">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-heading">Search</h2>
+                    <h3 class="section-subheading text-muted">Select any country on the map below</h3>
+                </div>
+            </div>
+            <div class="row">
+                
+                    <% include ../game/maprender.ejs %>
+                </div>
+            </div>    
+        </div>
+    </section>
+
+        
 
     <!-- aboutme Section -->
     <% include ../layouts/sites/about.ejs %>
