@@ -35,3 +35,6 @@ google.visualization.events.addListener(geochart, "regionClick", function (event
         var countryForm = document.getElementById('countryForm')
         countryForm.value = countryISO2;
         console.log(countryForm);
+
+// ways to format maps
+http://cmoreira.net/interactive-world-maps-demo/advanced-customization/

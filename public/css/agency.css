@@ -9,8 +9,6 @@ body {
     font-family: "Roboto Slab","Helvetica Neue",Helvetica,Arial,sans-serif;
 }
 
-
-
 p {
     font-size: 14px;
     line-height: 1.75;
@@ -169,7 +167,7 @@ fieldset[disabled] .btn-xl.active {
 }
 
 .navbar-default .navbar-brand {
-    font-family: "Kaushan Script","Helvetica Neue",Helvetica,Arial,cursive;
+    font-family: 'Patrick Hand', cursive;
     color: #369AD9;
 }
 
@@ -235,7 +233,7 @@ fieldset[disabled] .btn-xl.active {
     }
 
     .navbar-default .navbar-brand {
-        font-size: 2em;
+        font-size: 5em;
         -webkit-transition: all .3s;
         -moz-transition: all .3s;
         transition: all .3s;
@@ -269,13 +267,6 @@ header {
     -o-background-size: cover;
 }
 
-
- .jumbotron
-    {
-       
-}
-    }
-
 header .intro-text {
     padding-top: 100px;
     padding-bottom: 50px;
@@ -284,7 +275,7 @@ header .intro-text {
 header .intro-text .intro-lead-in {
     margin-bottom: 25px;
     font-family: "Droid Serif","Helvetica Neue",Helvetica,Arial,sans-serif;
-    font-size: 22px;
+    font-size: 30px;
     font-style: italic;
     line-height: 22px;
 }
@@ -293,7 +284,7 @@ header .intro-text .intro-heading {
     margin-bottom: 25px;
     text-transform: uppercase;
     font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
-    font-size: 50px;
+    font-size: 40px;
     font-weight: 700;
     line-height: 50px;
 }
@@ -307,7 +298,7 @@ header .intro-text .intro-heading {
     header .intro-text .intro-lead-in {
         margin-bottom: 25px;
         font-family: "Droid Serif","Helvetica Neue",Helvetica,Arial,sans-serif;
-        font-size: 40px;
+        font-size: 25px;
         font-style: italic;
         line-height: 40px;
     }
@@ -316,14 +307,14 @@ header .intro-text .intro-heading {
         margin-bottom: 50px;
         text-transform: uppercase;
         font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
-        font-size: 75px;
+        font-size: 25px;
         font-weight: 700;
         line-height: 75px;
     }
 }
 
 section {
-    padding: 100px 0;
+    padding: 70px 0;
 }
 
 section h2.section-heading {
@@ -333,7 +324,7 @@ section h2.section-heading {
 }
 
 section h3.section-subheading {
-    margin-bottom: 75px;
+    margin-bottom: 45px;
     text-transform: none;
     font-family: "Droid Serif","Helvetica Neue",Helvetica,Arial,sans-serif;
     font-size: 16px;
@@ -347,24 +338,24 @@ section h3.section-subheading {
     }
 }
 
-.service-heading {
+.moreinfo-heading {
     margin: 15px 0;
     text-transform: none;
 }
 
-#portfolio .portfolio-item {
+#search .search-item {
     right: 0;
     margin: 0 0 15px;
 }
 
-#portfolio .portfolio-item .portfolio-link {
+#search .search-item .search-link {
     display: block;
     position: relative;
     margin: 0 auto;
     max-width: 400px;
 }
 
-#portfolio .portfolio-item .portfolio-link .portfolio-hover {
+#search .search-item .search-link .search-hover {
     position: absolute;
     width: 100%;
     height: 100%;
@@ -375,11 +366,11 @@ section h3.section-subheading {
     transition: all ease .5s;
 }
 
-#portfolio .portfolio-item .portfolio-link .portfolio-hover:hover {
+#search .search-item .search-link .search-hover:hover {
     opacity: 1;
 }
 
-#portfolio .portfolio-item .portfolio-link .portfolio-hover .portfolio-hover-content {
+#search .search-item .search-link .search-hover .search-hover-content {
     position: absolute;
     top: 50%;
     width: 100%;
@@ -390,16 +381,16 @@ section h3.section-subheading {
     color: #fff;
 }
 
-#portfolio .portfolio-item .portfolio-link .portfolio-hover .portfolio-hover-content i {
+#search .search-item .search-link .search-hover .search-hover-content i {
     margin-top: -12px;
 }
 
-#portfolio .portfolio-item .portfolio-link .portfolio-hover .portfolio-hover-content h3,
-#portfolio .portfolio-item .portfolio-link .portfolio-hover .portfolio-hover-content h4 {
+#search .search-item .search-link .search-hover .search-hover-content h3,
+#search .search-item .search-link .search-hover .search-hover-content h4 {
     margin: 0;
 }
 
-#portfolio .portfolio-item .portfolio-caption {
+#search .search-item .search-caption {
     margin: 0 auto;
     padding: 25px;
     max-width: 400px;
@@ -407,24 +398,24 @@ section h3.section-subheading {
     background-color: #fff;
 }
 
-#portfolio .portfolio-item .portfolio-caption h4 {
+#search .search-item .search-caption h4 {
     margin: 0;
     text-transform: none;
 }
 
-#portfolio .portfolio-item .portfolio-caption p {
+#search .search-item .search-caption p {
     margin: 0;
     font-family: "Droid Serif","Helvetica Neue",Helvetica,Arial,sans-serif;
     font-size: 16px;
     font-style: italic;
 }
 
-#portfolio * {
+#search * {
     z-index: 2;
 }
 
 @media(min-width:767px) {
-    #portfolio .portfolio-item {
+    #search .search-item {
         margin: 0 0 30px;
     }
 }
@@ -629,23 +620,23 @@ section h3.section-subheading {
     }
 }
 
-.team-member {
+.aboutme-member {
     margin-bottom: 50px;
     text-align: center;
 }
 
-.team-member img {
+.aboutme-member img {
     margin: 0 auto;
     border: 7px solid #fff;
 }
 
-.team-member h4 {
+.aboutme-member h4 {
     margin-top: 25px;
-    margin-bottom: 0;
+    margin-bottom: 20px;
     text-transform: none;
 }
 
-.team-member p {
+.aboutme-member p {
     margin-top: 0;
 }
 

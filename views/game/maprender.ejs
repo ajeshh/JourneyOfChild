@@ -15,7 +15,7 @@ stroke:#6699cc; /* choose a color for the border */
 cursor:pointer; /* display the pointer when the map hovers the map. */
 }
     </style>
-    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript" src="/js/jsapi.js"></script>
     <script type="text/javascript">
       google.load("visualization", "1", {packages:["geochart"]});
       google.setOnLoadCallback(drawRegionsMap);
@@ -23,15 +23,8 @@ cursor:pointer; /* display the pointer when the map hovers the map. */
       function drawRegionsMap() {
 
         var data = google.visualization.arrayToDataTable([
-          ['Country', 'ISO2'],
-          
-    [
-      
-
-
-
-
-        ]);
+                    ['Country', 'ISO2'],
+                  ]);
 
         var options = {
           region: 'world', // World 
