@@ -118,7 +118,7 @@ app.get("/map2", function (req, res) {
 //show country results
 app.get("/search", function (req, res) {
   console.log("got it");
-  countryID = "IN";
+  countryID = req.query.country;
   console.log("got it too");
   async.parallel([
         function(callback){

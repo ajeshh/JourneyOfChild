@@ -8,7 +8,6 @@
     stroke:#6699cc;
     cursor:pointer;
 }
-
     </style>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
@@ -19,12 +18,11 @@
       function drawRegionsMap() {
 
         var data = google.visualization.arrayToDataTable([
-                    ['Country', 'ISO2'],
+          ['Country', 'ISO2'],
                   ]);
-
         var options = {
           region: 'world',
-          colorAxis: {colors: ['#FFF']},
+          colorAxis: {colors: ['#FFF'] },
           backgroundColor: '#369AD9',
           tooltip: {
                 isHtml: true,
@@ -42,9 +40,6 @@
             var countryISO2 = eventData["region"];
             console.log(countryISO2);
             var countryInput = document.getElementById('search');
-            countryInput = $('#search');
-            var val = countryInput.val()
-            console.log(val);
             var countryForm = document.getElementById('countryForm');
             countryInput.value = countryISO2;
             console.log(countryInput);
@@ -58,9 +53,9 @@
   <body>
     <div id="regions_div">
     </div>
-      <form id="countryForm" style="display:none;"   action="/search" method="get">
-        <input id="search" type="text" name="country"/>
-      </form>
+     <form id="countryForm" style="display:none;"   action="/search" method="get">
+      <input id="search" type="text" name="country"/>
+        </form>
 
   </body>
 </html>
