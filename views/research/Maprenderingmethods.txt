@@ -29,7 +29,7 @@ var geochart = new google.visualization.GeoChart(document.getElementById('region
 //regionclick to form
 google.visualization.events.addListener(geochart, "regionClick", function (eventData) {
         // GeoChart selections return an array of objects with a row property; no column information
-        /*var countryISO2 = eventData["region"];
+        var countryISO2 = eventData["region"];
         console.log(countryISO2);
         var countryInput = document.getElementById('search');
         var countryForm = document.getElementById('countryForm')
