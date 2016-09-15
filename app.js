@@ -3,7 +3,7 @@ var express = require("express"),
   methodOverride = require("method-override"),
   request = require("request"),
   pg = require("pg"),
-  db = require("./models"),
+  // db = require("./models"),
   passport = require("passport"),
   session = require("cookie-session"),
   async = require("async"),
@@ -24,80 +24,80 @@ app.use(session( {
   })
 );
 
-//passport use
-app.use(passport.initialize());
-app.use(passport.session());
+// //passport use
+// app.use(passport.initialize());
+// app.use(passport.session());
 
-//serializing user data
-passport.serializeUser(function(user, done){
-  console.log("SERIALIZED JUST RAN!");
+// //serializing user data
+// passport.serializeUser(function(user, done){
+//   console.log("SERIALIZED JUST RAN!");
 
-  done(null, user.id);
-});
+//   done(null, user.id);
+// });
 
-//deserializing user data
-passport.deserializeUser(function(id, done){
-  console.log("DESERIALIZED JUST RAN!");
-  db.user.find({
-      where: {
-        id: id
-      }
-    })
-    .then(function(user){
-      done(null, user);
-    },
-    function(err) {
-      done(err, null);
-    });
-});
+// //deserializing user data
+// passport.deserializeUser(function(id, done){
+//   console.log("DESERIALIZED JUST RAN!");
+//   db.user.find({
+//       where: {
+//         id: id
+//       }
+//     })
+//     .then(function(user){
+//       done(null, user);
+//     },
+//     function(err) {
+//       done(err, null);
+//     });
+// });
 
-// login 
-app.get("/login", function (req, res) {
-  if (req.user) {
-    res.redirect("/")
-  } else {
-    res.render("users/login");
-  }
-});
-// verify user login
-app.post('/login', passport.authenticate('local', {
-  successRedirect: '/',
-  failureRedirect: '/sign_up'
-}));
+// // login 
+// app.get("/login", function (req, res) {
+//   if (req.user) {
+//     res.redirect("/")
+//   } else {
+//     res.render("users/login");
+//   }
+// });
+// // verify user login
+// app.post('/login', passport.authenticate('local', {
+//   successRedirect: '/',
+//   failureRedirect: '/sign_up'
+// }));
 
-// log out
-app.get("/logout", function (req, res) {
-  req.logout();
-  res.redirect("/");
-});
+// // log out
+// app.get("/logout", function (req, res) {
+//   req.logout();
+//   res.redirect("/");
+// });
 
-//signup
-app.get("/sign_up", function (req, res) {
-  res.render("users/sign_up");
-});
+// //signup
+// app.get("/sign_up", function (req, res) {
+//   res.render("users/sign_up");
+// });
 
-//post new user data to DB
-app.post("/users", function (req, res) {
-  console.log("POST /users");
-  var newUser = req.body.user;
-  console.log("New User:", newUser);
-  // CREATE a user and secure their password
-  db.user.createSecure(newUser.email, newUser.password, 
-    function () {
-      // if a user fails to create make them signup again
-      res.redirect("/sign_up");
-    },
-    function (err, user) {
-      // when successfully created log the user in
-      // req.login is given by the passport
-      req.login(user, function(){
-        // after login redirect to home page
-        console.log("Logged in ", req.user)
-        console.log("Id: ", user.id)
-        res.redirect('/');
-      });
-    })
-});
+// //post new user data to DB
+// app.post("/users", function (req, res) {
+//   console.log("POST /users");
+//   var newUser = req.body.user;
+//   console.log("New User:", newUser);
+//   // CREATE a user and secure their password
+//   db.user.createSecure(newUser.email, newUser.password, 
+//     function () {
+//       // if a user fails to create make them signup again
+//       res.redirect("/sign_up");
+//     },
+//     function (err, user) {
+//       // when successfully created log the user in
+//       // req.login is given by the passport
+//       req.login(user, function(){
+//         // after login redirect to home page
+//         console.log("Logged in ", req.user)
+//         console.log("Id: ", user.id)
+//         res.redirect('/');
+//       });
+//     })
+// });
 
 
 
