@@ -135,13 +135,13 @@ app.get("/search", function (req, res) {
         },
         function(callback){
           console.log('Got 3');
-            request('http://api.worldbank.org/countries/' + countryID + '/indicators/SP.POP.0014.TO.ZS?MRV=1&format=JSON', function(err, resp, body){
+            request('http://api.worldbank.org/countries/' + countryID + '/indicators/EN.POP.SLUM.UR.ZS?MRV=1&format=JSON', function(err, resp, body){
                 callback(null, JSON.parse(body)[1]);
             });
         },
         function(callback){
           console.log('Got 4');
-            request('http://api.worldbank.org/countries/' + countryID + '/indicators/SP.POP.0014.TO.ZS?MRV=1&format=JSON', function(err, resp, body){
+            request('http://api.worldbank.org/countries/' + countryID + '/indicators/SP.POP.TOTL?MRV=1&format=JSON', function(err, resp, body){
                 callback(null, JSON.parse(body)[1]);
             });
         },
