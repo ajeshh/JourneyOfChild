@@ -2,7 +2,7 @@ var express = require("express"),
   bodyParser = require("body-parser"),
   methodOverride = require("method-override"),
   request = require("request"),
-  pg = require("pg"),
+  // pg = require("pg"),
   // db = require("./models"),
   passport = require("passport"),
   session = require("cookie-session"),
@@ -118,8 +118,10 @@ app.get("/map2", function (req, res) {
 //show country results
 app.get("/search", function (req, res) {
   console.log("got it");
-  countryID = req.query.country;
+  countryID = (req.query.country).toLowerCase();
   console.log("got it too");
+  countryFlag = ('http://flags.fmcdn.net/data/flags/normal/' + countryID + '.png');
+  console.log(countryFlag);
   async.parallel([
         function(callback){
           console.log('Got 1');
@@ -217,20 +219,6 @@ app.get("/search", function (req, res) {
                 callback(null, JSON.parse(body)[1]);
             });
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
       ],
         function(err, results){
           console.log('Got callback');
@@ -272,7 +260,7 @@ async.parallel([
       function(err, results){
         console.log('Got callback');
 console.log(results);
-      res.render('sites/home', {indicatorData: results});
+      res.render('sites/home',{indicatorData: results});
     });
 });
 

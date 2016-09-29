@@ -7,13 +7,25 @@
         <div class="container">
             <div class="intro-text">
                 <div class="intro-heading">There are 
-                <%= indicatorData[0][0].value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") %> people in this world. And <%=Math.round(indicatorData[1][0].value)%>% are under 14</div>
+                <%= indicatorData[0][0].value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") %> people in this country. And <%=Math.round(indicatorData[1][0].value)%>% are under 14</div>
                 <a href="#toddler" class="page-scroll btn btn-xl">Tell Me More</a>
             </div>
         </div>
        
     </header>
+
+   <section id="basic">
+        <div class="container">
+            <div class="row">
+               <h3 class="section-subheading text-muted">Country Population: </h3>
+                <h3 class="section-subheading text-muted">Number of Boys Under 14:</h3>
+                <h3 class="section-subheading text-muted">Number of Girls Under 14:</h3>
+
+            </div>
+        </div>
+    </section> 
     
+
 
     <!-- Services Section -->
     <section id="infant">
